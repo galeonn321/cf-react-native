@@ -36,9 +36,9 @@ Central Film is a mobile application built with React Native, utilizing MongoDB 
 
 2. **Install dependencies**:
     ```bash
-    npm install
+    yarn install
     cd client
-    npm install
+    yarn install
     ```
 
 3. **Set up environment variables**:
@@ -102,7 +102,7 @@ This project is licensed under a proprietary license. See the [LICENSE](LICENSE)
 
 ## Contact
 
-For any inquiries or feedback, please reach out to [your-email@example.com](mailto:your-email@example.com).
+For any inquiries or feedback, please reach out to [santiagomaruriramos@gmail.com](mailto:santiagomaruriramos@gmail.com).
 
 ---
 
