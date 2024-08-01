@@ -105,5 +105,3 @@ This project is licensed under a proprietary license. See the [LICENSE](LICENSE)
 For any inquiries or feedback, please reach out to [santiagomaruriramos@gmail.com](mailto:santiagomaruriramos@gmail.com).
 
 ---
-
-Happy Coding! 🎬📱
