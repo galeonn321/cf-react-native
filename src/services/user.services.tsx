@@ -18,7 +18,7 @@ export const getTokenFromUser = async () => {
     const keyToken = await AsyncStorage.getItem(TOKEN_KEY);
     LOG.info("keytoken found:", keyToken);
 
-    if (keyToken !== null) {
+    if (keyToken !== '') {
       return keyToken;
     }
   } catch (error) {

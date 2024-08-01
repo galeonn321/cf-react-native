@@ -21,7 +21,8 @@ const useMovieDB = (path: string) => {
 
   useEffect(() => {
     getFilms();
-  }, [path]); // Include 'path' in the dependency array to re-fetch when it changes
+  }, [path]); 
+  
 
   return films;
 };

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { API_KEY_MOVIES_TMDb } from "@env";
 import { Movie } from "../types/movieInterface";
+import { API_KEY_MOVIES_TMDb } from "@env";
 
 const tmdbAPI = axios.create({
   baseURL: "https://api.themoviedb.org/3",

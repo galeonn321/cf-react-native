@@ -8,13 +8,13 @@ import {
 } from "@gluestack-ui/themed";
 import { FlashList } from "@shopify/flash-list";
 import { useEffect, useState } from "react";
-import { LOG } from "../../config/logger.js";
 import { Dimensions } from "react-native";
 import useMovieDB from "../../hooks/useMovieDB";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Movie } from "../../types/movieInterface";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { LOG } from "../../config/logger";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -25,9 +25,8 @@ type CarouselComponentProps = {
 const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const films = useMovieDB(path); // useMovieDB returns Movie[] | undefined directly
+  const films = useMovieDB(path); 
 
-  //   LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
   useEffect(() => {
     if (films === undefined) {

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import MainNavigator from "./MainNavigator";
 import AuthNavigator from "./AuthNavigator";
 import { useDispatch, useSelector } from "react-redux";
-import { LOG } from "../config/logger";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import LoadingScreen from "../screens/LoadingScreen";
 import { authenticateUser } from "../helpers/auth";
+import { LOG } from "../config/logger";
 
 const AppNavigator: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
