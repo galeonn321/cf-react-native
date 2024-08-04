@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, Comment, Like, SavedMovie } from "../../../types/interfaces";
+import { LOG } from "../../../config/logger";
 
 const now = new Date();
-// Define the initial state using the `User` interface
+
 const initialState: User = {
   userId: '',
   username: '',
@@ -11,12 +12,12 @@ const initialState: User = {
   comments: [],
   likes: [],
   savedMovies: [],
-  createdAt: null,
-  updatedAt: null,
+  createdAt: 0,
+  updatedAt: 0,
 };
 
 const userSlice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState,
   reducers: {
     addUser: (state, action: PayloadAction<User>) => {
@@ -26,7 +27,7 @@ const userSlice = createSlice({
       return initialState;
     },
     updateUser: (state, action: PayloadAction<Partial<User>>) => {
-      return { ...state, ...action.payload, updatedAt: new Date() };
+      return { ...state, ...action.payload, updatedAt: now.getTime() };
     },
     addComment: (state, action: PayloadAction<{ userId: string, comment: Comment }>) => {
       if (state.userId === action.payload.userId) {

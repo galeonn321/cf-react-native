@@ -14,7 +14,8 @@ import { useState } from "react";
 import { Drawer } from "react-native-drawer-layout";
 import { removeTokenFromUser } from "../services/user.services";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LOG } from "../config/logger";
 
 const { height } = Dimensions.get("screen");
 
@@ -23,11 +24,14 @@ const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const cars = "rengoku";
   const [open, setOpen] = useState<boolean>(false);
+  const userData = useSelector((state:any)=>state.user)
 
   const handleLogout = async () => {
     await removeTokenFromUser();
     dispatch(setAuthStatus({ isAuthenticated: false }));
   };
+
+  LOG.error(userData)
 
   return (
     <>

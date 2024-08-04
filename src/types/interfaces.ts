@@ -15,15 +15,17 @@ export interface SavedMovie {
 }
 
 export interface User {
-  userId: string;
-  username: string;
-  email: string;
-  profilePicture?: string;
-  comments?: Comment[];
-  likes?: Like[];
-  savedMovies?: SavedMovie[];
-  createdAt?: Date | null;
-  updatedAt?: Date | null;
+ 
+    userId: string;
+    username: string;
+    email: string;
+    profilePicture?: string;
+    comments?: Comment[];
+    likes?: Like[];
+    savedMovies?: SavedMovie[];
+    createdAt?: Number | null;
+    updatedAt?: Number | null;
+ 
 }
 
 export interface UserLogin {

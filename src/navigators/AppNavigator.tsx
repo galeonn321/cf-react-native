@@ -23,20 +23,19 @@ const AppNavigator: React.FC = () => {
     const getFullYear = now.getTime();
     
     LOG.info(
-      "is user validated hasUserAccount()",
-      userData.ok === true,
+      `is user validated hasUserAccount() : ${userData.ok}`,
       userData.data,
-      getFullYear
+      `date in seconds : ${getFullYear}`,
     );
-    // if (userData.ok === true) {
-    //   dispatch(addUser(userData.data))
-    //   // dispatch(setAuthStatus({ isAuthenticated: true }));
-    //   setIsLoading(false);
-    //   return;
-    // } else {
-    //   setIsLoading(false);
-    //   LOG.info("no token found, please log in again or create account.");
-    // }
+    if (userData.ok === true) {
+      dispatch(setAuthStatus({ isAuthenticated: true }));
+      dispatch(addUser(userData.data))
+      setIsLoading(false);
+      return;
+    } else {
+      setIsLoading(false);
+      LOG.info("no token found, please log in again or create account.");
+    }
     return;
   };
 
