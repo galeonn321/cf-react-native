@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, Comment, Like, SavedMovie } from "../../../types/interfaces";
 
+const now = new Date();
 // Define the initial state using the `User` interface
 const initialState: User = {
   userId: '',
@@ -19,7 +20,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action: PayloadAction<User>) => {
-      return { ...state, ...action.payload, createdAt: new Date(), updatedAt: new Date() };
+      return { ...state, ...action.payload, createdAt: now.getTime(), updatedAt: now.getTime() };
     },
     removeUser: (state) => {
       return initialState;

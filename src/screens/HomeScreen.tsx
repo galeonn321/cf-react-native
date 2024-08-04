@@ -13,8 +13,8 @@ import {
 import { useState } from "react";
 import { Drawer } from "react-native-drawer-layout";
 import { removeTokenFromUser } from "../services/user.services";
-import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const { height } = Dimensions.get("screen");
 
@@ -41,11 +41,11 @@ const HomeScreen = () => {
           onClose={() => setOpen(false)}
           drawerStyle={{
             height: height,
-            backgroundColor: "#7777",
+            backgroundColor: "#F7F9F2",
           }}
           drawerPosition="right"
           renderDrawerContent={() => (
-            <Center bgColor="#000">
+            <Center bgColor="#F7F9F2">
               <Image
                 source={require("../../assets/images/avatar_default.jpg")}
                 alt="profile picture"
@@ -60,7 +60,7 @@ const HomeScreen = () => {
           )}
         >
           <Box flex={1} mx="$4">
-            <HStack my="$4" justifyContent="space-between" alignItems="center">
+            <HStack my="$4" justifyContent="space-between" alignItems="center" >
               <Text color="#fff">Welcome back {cars}</Text>
               <Pressable onPress={() => setOpen((prevOpen) => !prevOpen)}>
                 <Image

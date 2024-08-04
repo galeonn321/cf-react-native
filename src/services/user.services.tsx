@@ -27,11 +27,9 @@ export const getTokenFromUser = async () => {
 };
 
 export const removeTokenFromUser = async () => {
-  const dispatch = useDispatch();
   try {
     await AsyncStorage.removeItem(TOKEN_KEY);
     LOG.info("token removed");
-    dispatch(setAuthStatus({ isAuthenticated: false }));
     return;
   } catch (error) {
     LOG.error(error);

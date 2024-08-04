@@ -6,10 +6,13 @@ import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import LoadingScreen from "../screens/LoadingScreen";
 import { authenticateUser } from "../helpers/auth";
 import { LOG } from "../config/logger";
+import { addUser } from "../lib/redux/slices/userSlice";
 
 const AppNavigator: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const dispatch = useDispatch();
+  const now = new Date();
+
   useEffect(() => {
     hasUserAccount();
   }, []);
@@ -17,20 +20,23 @@ const AppNavigator: React.FC = () => {
   const hasUserAccount = async () => {
     setIsLoading(true);
     const userData = await authenticateUser();
-
+    const getFullYear = now.getTime();
+    
     LOG.info(
       "is user validated hasUserAccount()",
       userData.ok === true,
-      userData.data
+      userData.data,
+      getFullYear
     );
-    if (userData.ok === true) {
-      dispatch(setAuthStatus({ isAuthenticated: true }));
-      setIsLoading(false);
-      return;
-    } else {
-      setIsLoading(false);
-      LOG.info("no token found, please log in again or create account.");
-    }
+    // if (userData.ok === true) {
+    //   dispatch(addUser(userData.data))
+    //   // dispatch(setAuthStatus({ isAuthenticated: true }));
+    //   setIsLoading(false);
+    //   return;
+    // } else {
+    //   setIsLoading(false);
+    //   LOG.info("no token found, please log in again or create account.");
+    // }
     return;
   };
 
