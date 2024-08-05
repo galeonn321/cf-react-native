@@ -21,7 +21,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action: PayloadAction<User>) => {
-      return { ...state, ...action.payload, createdAt: now.getTime(), updatedAt: now.getTime() };
+      return {...action.payload, createdAt: now.getTime(), updatedAt: now.getTime() };
     },
     removeUser: (state) => {
       return initialState;

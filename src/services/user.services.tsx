@@ -1,12 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOG } from "../config/logger";
 import { TOKEN_KEY } from "@env";
-import { useDispatch } from "react-redux";
-import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 export const setTokenToUser = async (token: string) => {
   try {
-    // const jsonToken = JSON.stringify(token);
     await AsyncStorage.setItem(TOKEN_KEY, token);
   } catch (error) {
     LOG.error(`Error in setTokenToUser, error: ${error}`);
@@ -16,8 +13,6 @@ export const setTokenToUser = async (token: string) => {
 export const getTokenFromUser = async () => {
   try {
     const keyToken = await AsyncStorage.getItem(TOKEN_KEY);
-    LOG.info("keytoken found:", keyToken);
-
     if (keyToken !== '') {
       return keyToken;
     }

@@ -16,9 +16,10 @@ export interface SavedMovie {
 
 export interface User {
  
-    userId: string;
+    userId?: string;
     username: string;
     email: string;
+    password?: string;
     profilePicture?: string;
     comments?: Comment[];
     likes?: Like[];
@@ -33,3 +34,4 @@ export interface UserLogin {
   password: string;
   token?: string;
 }
+

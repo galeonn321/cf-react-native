@@ -22,10 +22,10 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { ButtonText } from "@gluestack-ui/themed";
 import CustomModal from "../components/modal/CustomModal";
 import { useModal } from "../components/modal/ModalContext";
-import { loginUser } from "../helpers/auth";
-import { useDispatch } from "react-redux";
+import { authenticateUser, loginUser } from "../helpers/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
-import { setTokenToUser } from "../services/user.services";
+import { addUser } from "../lib/redux/slices/userSlice";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const LoginScreen = () => {
 
     if (usernameInput === "" || passwordInput === "") {
       setIsLoading(false);
-      LOG.info("Inputs vacios");
+      LOG.debug("Inputs vacios");
       setMessage("Username or password is empty");
       showModal("Username or password or email is empty", false);
       return;
@@ -73,19 +73,19 @@ const LoginScreen = () => {
             });
         });
 
-        userValidation.then((result: any) => {
-          // LOG.debug("entre al segundo then :");
+        userValidation.then(async (result: any) => {
           if (result.ok) {
-            LOG.debug("resultado esta ok");
+            const userData = await authenticateUser();
 
             setMessage(result.message);
             showModal(result.message, false);
+
+            dispatch(addUser(userData.data));
 
             setTimeout(() => {
               dispatch(
                 setAuthStatus({
                   isAuthenticated: true,
-                  //  user: result.data
                 })
               );
             }, 2000);

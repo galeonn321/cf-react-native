@@ -11,7 +11,6 @@ import { addUser } from "../lib/redux/slices/userSlice";
 const AppNavigator: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const dispatch = useDispatch();
-  const now = new Date();
 
   useEffect(() => {
     hasUserAccount();
@@ -20,13 +19,7 @@ const AppNavigator: React.FC = () => {
   const hasUserAccount = async () => {
     setIsLoading(true);
     const userData = await authenticateUser();
-    const getFullYear = now.getTime();
     
-    LOG.info(
-      `is user validated hasUserAccount() : ${userData.ok}`,
-      userData.data,
-      `date in seconds : ${getFullYear}`,
-    );
     if (userData.ok === true) {
       dispatch(setAuthStatus({ isAuthenticated: true }));
       dispatch(addUser(userData.data))

@@ -103,7 +103,7 @@ const RegisterScreen = () => {
         userValidation
           .then((result: any) => {
             // Dispatch action or perform other actions on successful registration
-            LOG.debug("Registration successful after validation:", result);
+            LOG.debug("Registration successful after validation:", result.data.newUser);
             //open a modal
             if (result?.ok === true) {
               LOG.info("entre al result ok", result);
@@ -114,7 +114,7 @@ const RegisterScreen = () => {
               setTimeout(() => {
                 hideModal()
                 navigation.navigate("Login");
-              }, 3000);
+              }, 2000);
             } else {
               LOG.error("Registration failed:", result);
               setIsLoading(false);

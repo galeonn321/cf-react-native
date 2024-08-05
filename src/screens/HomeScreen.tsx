@@ -10,28 +10,31 @@ import {
   Text,
 } from "@gluestack-ui/themed";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Drawer } from "react-native-drawer-layout";
 import { removeTokenFromUser } from "../services/user.services";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { LOG } from "../config/logger";
+import { removeUser } from "../lib/redux/slices/userSlice";
 
 const { height } = Dimensions.get("screen");
 
-const HomeScreen = () => {
+const HomeScreen: React.FC = () => {
   const dispatch = useDispatch();
   const insets = useSafeAreaInsets();
-  const cars = "rengoku";
   const [open, setOpen] = useState<boolean>(false);
-  const userData = useSelector((state:any)=>state.user)
+  const userData = useSelector((state: any) => state.user);
 
   const handleLogout = async () => {
     await removeTokenFromUser();
+    dispatch(removeUser());
     dispatch(setAuthStatus({ isAuthenticated: false }));
   };
 
-  LOG.error(userData)
+  useEffect(() => {
+    LOG.warn(userData,`esto es lo que traje?`);
+  }, []);
 
   return (
     <>
@@ -64,13 +67,22 @@ const HomeScreen = () => {
           )}
         >
           <Box flex={1} mx="$4">
-            <HStack my="$4" justifyContent="space-between" alignItems="center" >
-              <Text color="#fff">Welcome back {cars}</Text>
+            <HStack my="$4" justifyContent="space-between" alignItems="center">
+              <HStack
+                justifyContent="space-between"
+                alignItems="baseline"
+                space="sm"
+              >
+                <Text color="#fff">Welcome</Text>
+                <Text fontSize="$lg" bold color="#fff">
+                  {userData.username}
+                </Text>
+              </HStack>
               <Pressable onPress={() => setOpen((prevOpen) => !prevOpen)}>
                 <Image
                   source={require("../../assets/images/avatar_default.jpg")}
                   alt="profile picture"
-                  size="2xs"
+                  size="xs"
                   rounded="$full"
                 />
               </Pressable>
