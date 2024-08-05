@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView } from "react-native";
+import { Dimensions, Platform, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchContent from "../components/searchContent/SearchContent";
 import {
@@ -17,6 +17,7 @@ import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { LOG } from "../config/logger";
 import { removeUser } from "../lib/redux/slices/userSlice";
+import * as ImagePicker from "expo-image-picker";
 
 const { height } = Dimensions.get("screen");
 
@@ -25,6 +26,39 @@ const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const [open, setOpen] = useState<boolean>(false);
   const userData = useSelector((state: any) => state.user);
+  const [image, setImage] = useState<string>("");
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Se necesita permiso para acceder a la galería");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    LOG.warn(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+
+  useEffect(() => {
+    LOG.info(image);
+  }, [image])
+  
 
   const handleLogout = async () => {
     await removeTokenFromUser();
@@ -33,7 +67,7 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    LOG.warn(userData,`esto es lo que traje?`);
+    LOG.warn(userData, `esto es lo que traje?`);
   }, []);
 
   return (
@@ -53,13 +87,15 @@ const HomeScreen: React.FC = () => {
           drawerPosition="right"
           renderDrawerContent={() => (
             <Center bgColor="#F7F9F2">
-              <Image
-                source={require("../../assets/images/avatar_default.jpg")}
-                alt="profile picture"
-                size="lg"
-                rounded="$full"
-                mt="$8"
-              />
+              <Pressable onPress={pickImage}>
+                <Image
+                  source={require("../../assets/images/avatar_default.jpg")}
+                  alt="profile picture"
+                  size="lg"
+                  rounded="$full"
+                  mt="$8"
+                />
+              </Pressable>
               <Pressable onPress={handleLogout}>
                 <Text>Log out</Text>
               </Pressable>
