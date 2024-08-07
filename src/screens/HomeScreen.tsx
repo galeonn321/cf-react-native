@@ -1,13 +1,16 @@
 import { Dimensions, Platform, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchContent from "../components/searchContent/SearchContent";
+import { Ionicons } from "@expo/vector-icons";
 import {
   Box,
   Center,
+  Divider,
   HStack,
   Image,
   Pressable,
   Text,
+  VStack,
 } from "@gluestack-ui/themed";
 
 import { useEffect, useState } from "react";
@@ -54,11 +57,9 @@ const HomeScreen: React.FC = () => {
     }
   };
 
-
   useEffect(() => {
     LOG.info(image);
-  }, [image])
-  
+  }, [image]);
 
   const handleLogout = async () => {
     await removeTokenFromUser();
@@ -74,7 +75,10 @@ const HomeScreen: React.FC = () => {
     <>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
-        style={{ paddingTop: insets.top, backgroundColor: "#000" }}
+        style={{
+          paddingTop: insets.top,
+          backgroundColor: "#000",
+        }}
       >
         <Drawer
           open={open}
@@ -83,23 +87,98 @@ const HomeScreen: React.FC = () => {
           drawerStyle={{
             height: height,
             backgroundColor: "#F7F9F2",
+            borderTopLeftRadius: 20,
+            borderWidth: 5,
+            borderColor: "#F7F9F2",
           }}
           drawerPosition="right"
           renderDrawerContent={() => (
-            <Center bgColor="#F7F9F2">
-              <Pressable onPress={pickImage}>
-                <Image
-                  source={require("../../assets/images/avatar_default.jpg")}
-                  alt="profile picture"
-                  size="lg"
-                  rounded="$full"
-                  mt="$8"
-                />
+            <Box flex={1} mx="$2">
+              <HStack
+                justifyContent="center"
+                alignItems="flex-end"
+                space="lg"
+                pt="$10"
+              >
+                <Pressable onPress={pickImage}>
+                  <Image
+                    source={require("../../assets/images/avatar_default.jpg")}
+                    alt="profile picture"
+                    size="lg"
+                    rounded="$full"
+                    borderWidth={1}
+                    borderColor="#000"
+                  />
+                </Pressable>
+                <VStack>
+                  <Text bold>{userData.username.toUpperCase()}</Text>
+                  <Text>{userData.email}</Text>
+                </VStack>
+              </HStack>
+
+              <HStack
+                justifyContent="space-between"
+                alignItems="center"
+                mt="$10"
+                mb="$4"
+              >
+                <HStack alignItems="flex-end" space="xs">
+                  <Ionicons name={"bookmark"} size={20} color={"#FF6F00"} />
+                  <Text color="#888" fontSize="$lg">
+                    Movies
+                  </Text>
+                </HStack>
+                <Text color="#888" fontSize="$lg">
+                  27
+                </Text>
+              </HStack>
+              <Divider />
+              <HStack
+                justifyContent="space-between"
+                alignItems="center"
+                mt="$10"
+                mb="$4"
+              >
+                <HStack alignItems="flex-end" space="xs">
+                  <Ionicons name={"chatbox"} size={20} color={"#FF6F00"} />
+                  <Text color="#888" fontSize="$lg">
+                    Comments
+                  </Text>
+                </HStack>
+                <Text color="#888" fontSize="$lg">
+                  27
+                </Text>
+              </HStack>
+              <Divider />
+              <HStack
+                justifyContent="space-between"
+                alignItems="center"
+                mt="$10"
+                mb="$4"
+              >
+                <HStack alignItems="flex-end" space="xs">
+                  <Ionicons name={"flame"} size={20} color={"#FF6F00"} />
+                  <Text color="#888" fontSize="$lg">
+                    Ratings
+                  </Text>
+                </HStack>
+                <Text color="#888" fontSize="$lg">
+                  27
+                </Text>
+              </HStack>
+              <Divider />
+              
+
+              <Pressable
+                onPress={handleLogout}
+                position="absolute"
+                top={height * 0.8}
+              >
+                <Text color="#FF6F00" bold>
+                  Log out
+                </Text>
               </Pressable>
-              <Pressable onPress={handleLogout}>
-                <Text>Log out</Text>
-              </Pressable>
-            </Center>
+            </Box>
           )}
         >
           <Box flex={1} mx="$4">
@@ -107,7 +186,7 @@ const HomeScreen: React.FC = () => {
               <HStack
                 justifyContent="space-between"
                 alignItems="baseline"
-                space="sm"
+                space="xs"
               >
                 <Text color="#fff">Welcome</Text>
                 <Text fontSize="$lg" bold color="#fff">
