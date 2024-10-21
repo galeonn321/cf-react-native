@@ -9,38 +9,40 @@ import { LOG } from "../config/logger";
 import { addUser } from "../lib/redux/slices/userSlice";
 
 const AppNavigator: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState<Boolean>(false);
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    hasUserAccount();
-  }, []);
+	useEffect(() => {
+		hasUserAccount();
+	}, []);
 
-  const hasUserAccount = async () => {
-    setIsLoading(true);
-    const userData = await authenticateUser();
-    
-    if (userData.ok === true) {
-      dispatch(setAuthStatus({ isAuthenticated: true }));
-      dispatch(addUser(userData.data))
-      setIsLoading(false);
-      return;
-    } else {
-      setIsLoading(false);
-      LOG.info("no token found, please log in again or create account.");
-    }
-    return;
-  };
+	const hasUserAccount = async () => {
+		setIsLoading(true);
+		const userData = await authenticateUser();
 
-  const isUserAuthenticated = useSelector(
-    (state: any) => state.auth.isAuthenticated
-  );
+		LOG.info(userData);
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+		if (userData.ok === true || false) {
+			dispatch(setAuthStatus({ isAuthenticated: true }));
+			dispatch(addUser(userData.data));
+			setIsLoading(false);
+			return;
+		} else {
+			setIsLoading(false);
+			LOG.info("no token found, please log in again or create account.");
+		}
+		return;
+	};
 
-  return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
+	const isUserAuthenticated = useSelector(
+		(state: any) => state.auth.isAuthenticated
+	);
+
+	if (isLoading) {
+		return <LoadingScreen />;
+	}
+
+	return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
 };
 
 export default AppNavigator;

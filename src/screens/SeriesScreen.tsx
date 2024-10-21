@@ -6,14 +6,15 @@ import PlayingNowComponent from "../components/carouselComponent/CarouselCompone
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const SeriesScreen = () => {
+	const insets = useSafeAreaInsets();
 
-  const insets = useSafeAreaInsets();
-
-  return (
-    <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
-      <PlayingNowComponent />
-    </ScrollView>
-  );
+	return (
+		<ScrollView
+			style={{ flex: 1, paddingTop: insets.top, backgroundColor: "#000" }}
+		>
+			<PlayingNowComponent />
+		</ScrollView>
+	);
 };
 
 export default SeriesScreen;

@@ -8,16 +8,16 @@ import store from "./src/lib/redux/store";
 import { ModalProvider } from "./src/components/modal/ModalContext";
 
 export default function App() {
-  return (
-    <Provider store={store}>
-      <GluestackUIProvider config={config}>
-        <ModalProvider>
-          <NavigationContainer>
-            <StatusBar />
-            <AppNavigator />
-          </NavigationContainer>
-        </ModalProvider>
-      </GluestackUIProvider>
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<GluestackUIProvider config={config}>
+				<ModalProvider>
+					<NavigationContainer>
+						<StatusBar />
+						<AppNavigator />
+					</NavigationContainer>
+				</ModalProvider>
+			</GluestackUIProvider>
+		</Provider>
+	);
 }

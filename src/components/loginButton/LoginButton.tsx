@@ -6,42 +6,42 @@ import { Box, Button, ButtonText, Modal } from "@gluestack-ui/themed";
 import { LOG } from "../../config/logger";
 
 interface LoginButtonProps {
-  usernameInput: string;
-  passwordInput: string;
+	usernameInput: string;
+	passwordInput: string;
 }
 
 const LoginButton: React.FC<LoginButtonProps> = ({
-  usernameInput,
-  passwordInput,
+	usernameInput,
+	passwordInput,
 }) => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    LOG.info(usernameInput, passwordInput);
-  }, []);
+	useEffect(() => {
+		LOG.info(usernameInput, passwordInput);
+	}, []);
 
-  const handleLogin = async () => {
-    if (usernameInput === "" || passwordInput === "") {
-      LOG.error("Username or password is empty");
-      return;
-    }
-  };
+	const handleLogin = async () => {
+		if (usernameInput === "" || passwordInput === "") {
+			LOG.error("Username or password is empty");
+			return;
+		}
+	};
 
-  return (
-    <Button
-      mt="$10"
-      rounded={"$full"}
-      bgColor="$red900"
-      size="md"
-      variant="solid"
-      action="primary"
-      isDisabled={false}
-      isFocusVisible={false}
-      onPress={handleLogin}
-    >
-      <ButtonText>Log In</ButtonText>
-    </Button>
-  );
+	return (
+		<Button
+			mt="$10"
+			rounded={"$full"}
+			bgColor="$red900"
+			size="md"
+			variant="solid"
+			action="primary"
+			isDisabled={false}
+			isFocusVisible={false}
+			onPress={handleLogin}
+		>
+			<ButtonText>Log In</ButtonText>
+		</Button>
+	);
 };
 
 export default LoginButton;

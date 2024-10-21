@@ -2,12 +2,12 @@ import { Dimensions, Platform, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchContent from "../components/searchContent/SearchContent";
 import {
-  Box,
-  Center,
-  HStack,
-  Image,
-  Pressable,
-  Text,
+	Box,
+	Center,
+	HStack,
+	Image,
+	Pressable,
+	Text,
 } from "@gluestack-ui/themed";
 
 import { useEffect, useState } from "react";
@@ -22,113 +22,111 @@ import * as ImagePicker from "expo-image-picker";
 const { height } = Dimensions.get("screen");
 
 const HomeScreen: React.FC = () => {
-  const dispatch = useDispatch();
-  const insets = useSafeAreaInsets();
-  const [open, setOpen] = useState<boolean>(false);
-  const userData = useSelector((state: any) => state.user);
-  const [image, setImage] = useState<string>("");
+	const dispatch = useDispatch();
+	const insets = useSafeAreaInsets();
+	const [open, setOpen] = useState<boolean>(false);
+	const userData = useSelector((state: any) => state.user);
+	const [image, setImage] = useState<string>("");
 
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert("Se necesita permiso para acceder a la galería");
-        }
-      }
-    })();
-  }, []);
+	useEffect(() => {
+		(async () => {
+			if (Platform.OS !== "web") {
+				const { status } =
+					await ImagePicker.requestMediaLibraryPermissionsAsync();
+				if (status !== "granted") {
+					alert("Se necesita permiso para acceder a la galería");
+				}
+			}
+		})();
+	}, []);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-    LOG.warn(result);
+	const pickImage = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+		});
+		LOG.warn(result);
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
+		if (!result.canceled) {
+			setImage(result.assets[0].uri);
+		}
+	};
 
+	useEffect(() => {
+		LOG.info(image);
+	}, [image]);
 
-  useEffect(() => {
-    LOG.info(image);
-  }, [image])
-  
+	const handleLogout = async () => {
+		await removeTokenFromUser();
+		dispatch(removeUser());
+		dispatch(setAuthStatus({ isAuthenticated: false }));
+	};
 
-  const handleLogout = async () => {
-    await removeTokenFromUser();
-    dispatch(removeUser());
-    dispatch(setAuthStatus({ isAuthenticated: false }));
-  };
+	useEffect(() => {
+		LOG.warn(userData, `esto es lo que traje?`);
+	}, []);
 
-  useEffect(() => {
-    LOG.warn(userData, `esto es lo que traje?`);
-  }, []);
-
-  return (
-    <>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        style={{ paddingTop: insets.top, backgroundColor: "#000" }}
-      >
-        <Drawer
-          open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}
-          drawerStyle={{
-            height: height,
-            backgroundColor: "#F7F9F2",
-          }}
-          drawerPosition="right"
-          renderDrawerContent={() => (
-            <Center bgColor="#F7F9F2">
-              <Pressable onPress={pickImage}>
-                <Image
-                  source={require("../../assets/images/avatar_default.jpg")}
-                  alt="profile picture"
-                  size="lg"
-                  rounded="$full"
-                  mt="$8"
-                />
-              </Pressable>
-              <Pressable onPress={handleLogout}>
-                <Text>Log out</Text>
-              </Pressable>
-            </Center>
-          )}
-        >
-          <Box flex={1} mx="$4">
-            <HStack my="$4" justifyContent="space-between" alignItems="center">
-              <HStack
-                justifyContent="space-between"
-                alignItems="baseline"
-                space="sm"
-              >
-                <Text color="#fff">Welcome</Text>
-                <Text fontSize="$lg" bold color="#fff">
-                  {userData.username}
-                </Text>
-              </HStack>
-              <Pressable onPress={() => setOpen((prevOpen) => !prevOpen)}>
-                <Image
-                  source={require("../../assets/images/avatar_default.jpg")}
-                  alt="profile picture"
-                  size="xs"
-                  rounded="$full"
-                />
-              </Pressable>
-            </HStack>
-            <SearchContent />
-          </Box>
-        </Drawer>
-      </ScrollView>
-    </>
-  );
+	return (
+		<>
+			<ScrollView
+				contentContainerStyle={{ flexGrow: 1 }}
+				style={{ paddingTop: insets.top, backgroundColor: "#000" }}
+			>
+				<Drawer
+					open={open}
+					onOpen={() => setOpen(true)}
+					onClose={() => setOpen(false)}
+					drawerStyle={{
+						height: height,
+						backgroundColor: "#F7F9F2",
+					}}
+					drawerPosition="right"
+					renderDrawerContent={() => (
+						<Center bgColor="#F7F9F2">
+							<Pressable onPress={pickImage}>
+								<Image
+									source={require("../../assets/images/avatar_default.jpg")}
+									alt="profile picture"
+									size="lg"
+									rounded="$full"
+									mt="$8"
+								/>
+							</Pressable>
+							<Pressable onPress={handleLogout}>
+								<Text>Log out</Text>
+							</Pressable>
+						</Center>
+					)}
+				>
+					<Box flex={1} mx="$4">
+						<HStack my="$4" justifyContent="space-between" alignItems="center">
+							<HStack
+								justifyContent="space-between"
+								alignItems="baseline"
+								space="sm"
+							>
+								<Text color="#fff">Welcome</Text>
+								<Text fontSize="$lg" bold color="#fff">
+									{userData.username}
+								</Text>
+							</HStack>
+							<Pressable onPress={() => setOpen((prevOpen) => !prevOpen)}>
+								<Image
+									source={require("../../assets/images/avatar_default.jpg")}
+									alt="profile picture"
+									size="xs"
+									rounded="$full"
+								/>
+							</Pressable>
+						</HStack>
+						<SearchContent />
+					</Box>
+				</Drawer>
+			</ScrollView>
+		</>
+	);
 };
 
 export default HomeScreen;
