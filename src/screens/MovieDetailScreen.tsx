@@ -89,6 +89,7 @@ const MovieDetailScreen = ({ route }: any) => {
 						borderRadius={"$full"}
 						w={50}
 						alignSelf="center"
+						backgroundColor="#000"
 					/>
 					<HStack justifyContent="space-between" alignItems="center" pt="$4">
 						<Text
@@ -120,7 +121,7 @@ const MovieDetailScreen = ({ route }: any) => {
 							<></>
 						)}
 					</HStack>
-					<HStack space="lg" mt={"$4"} maxWidth={width} flexWrap="wrap">
+					<HStack space="md" mt={"$4"} maxWidth={width} flexWrap="wrap">
 						{genreNames.map((genre: string, index: number) => (
 							<Box
 								backgroundColor="#DBE3FF"
@@ -135,7 +136,32 @@ const MovieDetailScreen = ({ route }: any) => {
 							</Box>
 						))}
 					</HStack>
-
+					<Box my="$4">
+						<Text fontSize="$lg" bold>
+							Where to watch
+						</Text>
+						<HStack
+							mx="$2"
+							mt="$4"
+							flexWrap="wrap"
+							space="lg"
+							justifyContent="center"
+						>
+							{genresList.map((item: any, index: any) => (
+								<Box
+									backgroundColor="#DBE3FF"
+									key={index}
+									py={"$6"}
+									px={"$6"}
+									rounded={"$full"}
+								>
+									<Text color="#88A4E8" fontWeight={400} fontSize={"$sm"}>
+										14
+									</Text>
+								</Box>
+							))}
+						</HStack>
+					</Box>
 					<HStack mt="$4" space="4xl">
 						<VStack>
 							<Text color="#979797">Original Language</Text>

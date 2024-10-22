@@ -59,7 +59,7 @@ const LoginScreen = () => {
 					email: usernameInput,
 					password: passwordInput,
 				};
-				console.log('entramos al handlelogin')
+				console.log("entramos al handlelogin");
 				const userValidation = new Promise((resolve, reject) => {
 					loginUser(userData)
 						.then((result) => {

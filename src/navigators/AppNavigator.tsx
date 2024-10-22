@@ -9,7 +9,7 @@ import { LOG } from "../config/logger";
 import { addUser } from "../lib/redux/slices/userSlice";
 
 const AppNavigator: React.FC = () => {
-	const [isLoading, setIsLoading] = useState<Boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -19,18 +19,14 @@ const AppNavigator: React.FC = () => {
 	const hasUserAccount = async () => {
 		setIsLoading(true);
 		const userData = await authenticateUser();
-
-		LOG.info(userData);
-
 		if (userData.ok === true || false) {
 			dispatch(setAuthStatus({ isAuthenticated: true }));
 			dispatch(addUser(userData.data));
 			setIsLoading(false);
 			return;
-		} else {
-			setIsLoading(false);
-			LOG.info("no token found, please log in again or create account.");
 		}
+		setIsLoading(false);
+		LOG.info("no token found, please log in again or create account.");
 		return;
 	};
 

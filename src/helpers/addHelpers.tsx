@@ -1,9 +1,9 @@
 import { LOG } from "../config/logger";
 import { Movie } from "../types/movieInterface";
 
-const API_URL_CREATE_MOVIE = "http://192.168.1.180:3000/api/movies/createMovie";
-const API_URL_ADD_COMMENT = "http://192.168.1.180:3000/api/movies/addComment";
-const API_URL_RATE_MOVIE = "http://192.168.1.180:3000/api/movies/rateMovie";
+const API_URL_CREATE_MOVIE = "http://192.168.1.179:3000/api/movies/createMovie";
+const API_URL_ADD_COMMENT = "http://192.168.1.179:3000/api/movies/addComment";
+const API_URL_RATE_MOVIE = "http://192.168.1.179:3000/api/movies/rateMovie";
 
 // const API_URL_CREATE_MOVIE = "http://192.168.1.246:4000/api/movies/createMovie";
 // const API_URL_ADD_COMMENT = "http://192.168.1.246:4000/api/movies/addComment";
