@@ -4,10 +4,9 @@
 	"main": "node_modules/expo/AppEntry.js",
 	"scripts": {
 		"start": "npx expo start",
-		"build": "npx expo build",
-		"android": "expo start --android",
-		"ios": "expo start --ios",
-		"web": "expo start --web",
+		"android": "npx expo android",
+		"ios": "npx expo ios",
+		"web": "npx expo web",
 		"format": "biome format",
 		"lint": "biome lint",
 		"test": "jest"
@@ -49,6 +48,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.25.2",
 		"@biomejs/biome": "1.9.4",
+		"@types/bun": "^1.1.12",
 		"@types/hammerjs": "^2.0.45",
 		"@types/react": "^18.3.1",
 		"@types/react-native-vector-icons": "^6.4.18",
