@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOG } from "../config/logger";
 import { removeUser } from "../lib/redux/slices/userSlice";
 import * as ImagePicker from "expo-image-picker";
+import type { RootState } from "../lib/redux/store";
 
 const { height } = Dimensions.get("screen");
 
@@ -25,7 +26,7 @@ const HomeScreen: React.FC = () => {
 	const dispatch = useDispatch();
 	const insets = useSafeAreaInsets();
 	const [open, setOpen] = useState<boolean>(false);
-	const userData = useSelector((state: any) => state.user);
+	const userData = useSelector((state: RootState) => state.user);
 	const [image, setImage] = useState<string>("");
 
 	useEffect(() => {
@@ -41,7 +42,7 @@ const HomeScreen: React.FC = () => {
 	}, []);
 
 	const pickImage = async () => {
-		let result = await ImagePicker.launchImageLibraryAsync({
+		const result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.All,
 			allowsEditing: true,
 			aspect: [4, 3],

@@ -1,14 +1,15 @@
 //hook para autenticar al usuario
 
 import { useDispatch, useSelector } from "react-redux";
-import { User } from "../types/interfaces";
+import type { User } from "../types/interfaces";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import { LOG } from "../config/logger";
+import type { RootState } from "../lib/redux/store";
 
 const useAuthentication = (isAuthenticated: boolean, user: null | User) => {
 	const dispatch = useDispatch();
 	const isUserAuthenticated = useSelector(
-		(state: any) => state.auth.isAuthenticated
+		(state: RootState) => state.auth.isAuthenticated
 	);
 
 	const payload = {

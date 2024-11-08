@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { User, Comment, Like, SavedMovie } from "../../../types/interfaces";
 import { LOG } from "../../../config/logger";
 
