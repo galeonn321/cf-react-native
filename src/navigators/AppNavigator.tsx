@@ -7,6 +7,7 @@ import LoadingScreen from "../screens/LoadingScreen";
 import { authenticateUser } from "../helpers/auth";
 import { LOG } from "../config/logger";
 import { addUser } from "../lib/redux/slices/userSlice";
+import type { RootState } from "../lib/redux/store";
 
 const AppNavigator: React.FC = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,19 +20,22 @@ const AppNavigator: React.FC = () => {
 	const hasUserAccount = async () => {
 		setIsLoading(true);
 		const userData = await authenticateUser();
-		if (userData.ok === true || false) {
+
+		LOG.debug(userData, "hahaha");
+
+
+		if (userData?.ok && userData.data) {
 			dispatch(setAuthStatus({ isAuthenticated: true }));
-			dispatch(addUser(userData.data));
-			setIsLoading(false);
-			return;
+			dispatch(addUser(userData.data)); // userData.data es de tipo User
+		} else {
+			LOG.info("No token found, please log in again or create an account.");
 		}
+
 		setIsLoading(false);
-		LOG.info("no token found, please log in again or create account.");
-		return;
 	};
 
 	const isUserAuthenticated = useSelector(
-		(state: any) => state.auth.isAuthenticated
+		(state: RootState) => state.auth.isAuthenticated
 	);
 
 	if (isLoading) {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User, Comment, Like, SavedMovie } from "../../../types/interfaces";
+import type { User, Comment, Like, SavedMovie } from "../../../types/interfaces";
 import { LOG } from "../../../config/logger";
 
 const now = new Date();
@@ -22,12 +22,13 @@ const userSlice = createSlice({
 	reducers: {
 		addUser: (state, action: PayloadAction<User>) => {
 			return {
+				...state,
 				...action.payload,
 				createdAt: now.getTime(),
 				updatedAt: now.getTime(),
 			};
 		},
-		removeUser: (state) => {
+		removeUser: () => {
 			return initialState;
 		},
 		updateUser: (state, action: PayloadAction<Partial<User>>) => {
@@ -38,36 +39,21 @@ const userSlice = createSlice({
 			action: PayloadAction<{ userId: string; comment: Comment }>
 		) => {
 			if (state.userId === action.payload.userId) {
-				return {
-					...state,
-					comments: [...(state.comments || []), action.payload.comment],
-				};
+				state.comments.push(action.payload.comment);
 			}
-			return state;
 		},
 		addLike: (state, action: PayloadAction<{ userId: string; like: Like }>) => {
 			if (state.userId === action.payload.userId) {
-				return {
-					...state,
-					likes: [...(state.likes || []), action.payload.like],
-				};
+				state.likes.push(action.payload.like);
 			}
-			return state;
 		},
 		saveMovie: (
 			state,
 			action: PayloadAction<{ userId: string; savedMovie: SavedMovie }>
 		) => {
 			if (state.userId === action.payload.userId) {
-				return {
-					...state,
-					savedMovies: [
-						...(state.savedMovies || []),
-						action.payload.savedMovie,
-					],
-				};
+				state.savedMovies.push(action.payload.savedMovie);
 			}
-			return state;
 		},
 	},
 });

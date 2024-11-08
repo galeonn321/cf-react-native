@@ -55,7 +55,7 @@ const LoginScreen = () => {
 		} else {
 			try {
 				const userData = {
-					username: usernameInput,
+					username: usernameInput.toLowerCase(),
 					email: usernameInput,
 					password: passwordInput,
 				};

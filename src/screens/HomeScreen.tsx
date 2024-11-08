@@ -54,19 +54,15 @@ const HomeScreen: React.FC = () => {
 		}
 	};
 
-	useEffect(() => {
-		LOG.info(image);
-	}, [image]);
-
 	const handleLogout = async () => {
 		await removeTokenFromUser();
 		dispatch(removeUser());
 		dispatch(setAuthStatus({ isAuthenticated: false }));
 	};
 
-	useEffect(() => {
-		LOG.warn(userData, `esto es lo que traje?`);
-	}, []);
+	// useEffect(() => {
+	// 	LOG.warn(userData, `esto es lo que traje?`);
+	// }, []);
 
 	return (
 		<>

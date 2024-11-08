@@ -23,8 +23,8 @@ export interface User {
 	comments?: Comment[];
 	likes?: Like[];
 	savedMovies?: SavedMovie[];
-	createdAt?: Number | null;
-	updatedAt?: Number | null;
+	createdAt?: number | null;
+	updatedAt?: number | null;
 }
 
 export interface UserLogin {

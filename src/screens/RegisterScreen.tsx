@@ -56,8 +56,8 @@ const RegisterScreen = () => {
 	const handleRegister = () => {
 		setIsLoading(true);
 		const userData: User = {
-			username: usernameInput,
-			email: emailInput,
+			username: usernameInput.toLowerCase(),
+			email: emailInput.toLowerCase(),
 			password: passwordInput,
 		};
 		if (usernameInput === "" || passwordInput === "" || emailInput === "") {
