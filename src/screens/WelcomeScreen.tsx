@@ -7,7 +7,7 @@ import {
 	Text,
 } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { Dimensions, View } from "react-native";
 import Swiper from "react-native-swiper";
 import { useDispatch } from "react-redux";

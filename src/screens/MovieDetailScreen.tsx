@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get("window");
 const MovieDetailScreen = ({ route }: any) => {
 	const { filmItem } = route.params;
 	const [isTruncated, setIsTruncated] = useState(true);
-	const roundedNumber = parseFloat(filmItem.vote_average.toFixed(1));
+	const roundedNumber = Number.parseFloat(filmItem.vote_average.toFixed(1));
 	const Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77];
 	const genresList = [
 		{ id: 28, name: "Action" },

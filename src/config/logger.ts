@@ -15,7 +15,7 @@ const config = {
 			error: "redBright",
 		},
 	},
-	dateFormat: (date: Date) => date.toLocaleTimeString() + " ",
+	dateFormat: (date: Date) => `${date.toLocaleTimeString()} `,
 };
 
 const LOG = logger.createLogger(config);

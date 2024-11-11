@@ -11,9 +11,9 @@ import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import useMovieDB from "../../hooks/useMovieDB";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Movie } from "../../types/movieInterface";
+import type { Movie } from "../../types/movieInterface";
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { LOG } from "../../config/logger";
 
 const { height, width } = Dimensions.get("screen");
@@ -24,7 +24,7 @@ type CarouselComponentProps = {
 
 const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
 	const navigation = useNavigation<StackNavigationProp<any>>();
-	const [isLoading, setIsLoading] = useState<Boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const films = useMovieDB(path);
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
 
 	const renderItem = ({ item }: { item: Movie }, index: number) => {
 		const uri = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-		const roundedNumber = parseFloat(item.vote_average.toFixed(1));
+		const roundedNumber = Number.parseFloat(item.vote_average.toFixed(1));
 		return (
 			<Pressable
 				onPress={() => {

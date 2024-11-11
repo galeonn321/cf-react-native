@@ -14,10 +14,10 @@ import {
 import { LOG } from "../../config/logger";
 import searchMovieDB from "../../api/searchMovieDB";
 import { FlashList } from "@shopify/flash-list";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions, View } from "react-native";
-import { Movie } from "../../types/movieInterface";
+import type { Movie } from "../../types/movieInterface";
 import { AntDesign } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createMovie } from "../../helpers/addHelpers";
