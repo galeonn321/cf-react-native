@@ -8,16 +8,20 @@ const config = {
 	transport: __DEV__ ? consoleTransport : fileAsyncTransport,
 	severity: __DEV__ ? "debug" : "error",
 	transportOptions: {
-		colors: {
-			debug: "greenBright",
-			info: "blueBright",
-			warn: "yellowBright",
-			error: "redBright",
-		},
+		colors: __DEV__
+			? {
+					debug: "greenBright",
+					info: "blueBright",
+					warn: "yellowBright",
+					error: "redBright",
+				}
+			: undefined,
+		// Specify file path for production logs (optional)
+		filePath: "path/to/logfile.log",
 	},
-	dateFormat: (date: Date) => `${date.toLocaleTimeString()} `,
+	dateFormat: (date: Date) => `${date.toISOString()}`,
 };
 
 const LOG = logger.createLogger(config);
 
-export { LOG };
+export { LOG, config };

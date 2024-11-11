@@ -1,3 +1,5 @@
+import type { Movie } from "./movieInterface";
+
 // Unified User Interface
 export interface User {
 	__v: number;
@@ -35,4 +37,10 @@ export interface UserValidationResult {
 
 export interface Data {
 	token: string;
+}
+
+export interface ResponseMovieExists {
+	ok: boolean;
+	message: string;
+	data: string | Movie;
 }

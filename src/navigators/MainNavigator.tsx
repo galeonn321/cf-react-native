@@ -2,8 +2,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MovieDetailScreen from "../screens/MovieDetailScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import WantToWatch from "../screens/WantToWatch";
+import type { Movie } from "../types/movieInterface";
 
-const MainStack = createStackNavigator();
+export type RootStackParams = {
+	HomeScreen: undefined;
+	BottomTabNavigator: undefined;
+	DetailMovie: { filmItem: Movie };
+	WantToWatch: undefined;
+};
+
+const MainStack = createStackNavigator<RootStackParams>();
 
 const isSignedIn = true;
 

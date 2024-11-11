@@ -35,3 +35,9 @@ export enum OriginalLanguage {
 	Es = "es",
 	Fr = "fr",
 }
+
+export interface MovieItem {
+	item: Movie;
+	index: number;
+	target: string;
+}

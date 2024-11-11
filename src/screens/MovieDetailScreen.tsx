@@ -17,11 +17,17 @@ import CommentItem from "../components/commentSectionComponent/CommentItem";
 import FilmCommentInput from "../components/filmCommentInput/FilmCommentInput";
 import { LOG } from "../config/logger";
 import { ButtonText } from "@gluestack-ui/themed";
+import type { RootStackParams } from "../navigators/MainNavigator";
+import type { StackScreenProps } from "@react-navigation/stack";
+import type { Movie } from "../types/movieInterface";
 
 const { width, height } = Dimensions.get("window");
 
-const MovieDetailScreen = ({ route }: any) => {
+interface Props extends StackScreenProps<RootStackParams, "DetailMovie"> { }
+
+const MovieDetailScreen = ({ route }: Props) => {
 	const { filmItem } = route.params;
+	LOG.info(filmItem);
 	const [isTruncated, setIsTruncated] = useState(true);
 	const roundedNumber = Number.parseFloat(filmItem.vote_average.toFixed(1));
 	const Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77];
@@ -47,7 +53,7 @@ const MovieDetailScreen = ({ route }: any) => {
 		{ id: 37, name: "Western" },
 	];
 
-	const genreNames = filmItem.genre_ids.map((genreId: any) => {
+	const genreNames = filmItem.genre_ids.map((genreId) => {
 		const genre = genresList.find((g) => g.id === genreId);
 		return genre ? genre.name : null;
 	});
@@ -122,10 +128,11 @@ const MovieDetailScreen = ({ route }: any) => {
 						)}
 					</HStack>
 					<HStack space="md" mt={"$4"} maxWidth={width} flexWrap="wrap">
-						{genreNames.map((genre: string, index: number) => (
+						{genreNames.map((genre, index) => (
 							<Box
 								backgroundColor="#DBE3FF"
-								key={index}
+								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+								key={`${genre}-${index}`}
 								py={"$0.5"}
 								px={"$3"}
 								rounded={"$full"}
@@ -147,16 +154,16 @@ const MovieDetailScreen = ({ route }: any) => {
 							space="lg"
 							justifyContent="center"
 						>
-							{genresList.map((item: any, index: any) => (
+							{genresList.map((item, index) => (
 								<Box
 									backgroundColor="#DBE3FF"
-									key={index}
+									key={`${item.id}-${index}`}
 									py={"$6"}
 									px={"$6"}
 									rounded={"$full"}
 								>
 									<Text color="#88A4E8" fontWeight={400} fontSize={"$sm"}>
-										14
+										{item.id}
 									</Text>
 								</Box>
 							))}

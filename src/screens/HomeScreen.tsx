@@ -67,61 +67,56 @@ const HomeScreen: React.FC = () => {
 
 	return (
 		<>
-			<ScrollView
-				contentContainerStyle={{ flexGrow: 1 }}
-				style={{ paddingTop: insets.top, backgroundColor: "#000" }}
+			<Drawer
+				open={open}
+				onOpen={() => setOpen(true)}
+				onClose={() => setOpen(false)}
+				drawerStyle={{
+					height: height,
+					backgroundColor: "#F7F9F2",
+				}}
+				drawerPosition="right"
+				renderDrawerContent={() => (
+					<Center bgColor="#F7F9F2">
+						<Pressable onPress={pickImage}>
+							<Image
+								source={require("../../assets/images/avatar_default.jpg")}
+								alt="profile picture"
+								size="lg"
+								rounded="$full"
+								mt="$8"
+							/>
+						</Pressable>
+						<Pressable onPress={handleLogout}>
+							<Text>Log out</Text>
+						</Pressable>
+					</Center>
+				)}
 			>
-				<Drawer
-					open={open}
-					onOpen={() => setOpen(true)}
-					onClose={() => setOpen(false)}
-					drawerStyle={{
-						height: height,
-						backgroundColor: "#F7F9F2",
-					}}
-					drawerPosition="right"
-					renderDrawerContent={() => (
-						<Center bgColor="#F7F9F2">
-							<Pressable onPress={pickImage}>
-								<Image
-									source={require("../../assets/images/avatar_default.jpg")}
-									alt="profile picture"
-									size="lg"
-									rounded="$full"
-									mt="$8"
-								/>
-							</Pressable>
-							<Pressable onPress={handleLogout}>
-								<Text>Log out</Text>
-							</Pressable>
-						</Center>
-					)}
-				>
-					<Box flex={1} mx="$4">
-						<HStack my="$4" justifyContent="space-between" alignItems="center">
-							<HStack
-								justifyContent="space-between"
-								alignItems="baseline"
-								space="sm"
-							>
-								<Text color="#fff">Welcome</Text>
-								<Text fontSize="$lg" bold color="#fff">
-									{userData.username}
-								</Text>
-							</HStack>
-							<Pressable onPress={() => setOpen((prevOpen) => !prevOpen)}>
-								<Image
-									source={require("../../assets/images/avatar_default.jpg")}
-									alt="profile picture"
-									size="xs"
-									rounded="$full"
-								/>
-							</Pressable>
+				<Box pt={insets.top} bgColor="#000" flex={1} px="$4">
+					<HStack my="$4" justifyContent="space-between" alignItems="center">
+						<HStack
+							justifyContent="space-between"
+							alignItems="baseline"
+							space="sm"
+						>
+							<Text color="#fff">Welcome</Text>
+							<Text fontSize="$lg" bold color="#fff">
+								{userData.username}
+							</Text>
 						</HStack>
-						<SearchContent />
-					</Box>
-				</Drawer>
-			</ScrollView>
+						<Pressable onPress={() => setOpen((prevOpen) => !prevOpen)}>
+							<Image
+								source={require("../../assets/images/avatar_default.jpg")}
+								alt="profile picture"
+								size="xs"
+								rounded="$full"
+							/>
+						</Pressable>
+					</HStack>
+					<SearchContent />
+				</Box>
+			</Drawer>
 		</>
 	);
 };

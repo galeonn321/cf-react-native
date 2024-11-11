@@ -12,7 +12,7 @@ const SeriesScreen = () => {
 		<ScrollView
 			style={{ flex: 1, paddingTop: insets.top, backgroundColor: "#000" }}
 		>
-			<PlayingNowComponent />
+			<PlayingNowComponent path={""} />
 		</ScrollView>
 	);
 };
