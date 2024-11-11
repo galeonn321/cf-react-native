@@ -19,16 +19,16 @@ import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
 const windowHeight = Dimensions.get("window").height;
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { registerUser } from "../helpers/auth";
-import { User } from "../types/interfaces";
+import type { User } from "../types/interfaces";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import CustomModal from "../components/modal/CustomModal";
 import { useModal } from "../components/modal/ModalContext";
 
 const RegisterScreen = () => {
 	const navigation = useNavigation<StackNavigationProp<any>>();
-	const [showPassword, setShowPassword] = useState<Boolean>(false);
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [usernameInput, setUsernameInput] = useState<string>("");
 	const [emailInput, setEmailInput] = useState<string>("");
 	const [passwordInput, setPasswordInput] = useState<string>("");

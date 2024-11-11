@@ -44,7 +44,7 @@ const LoginScreen = () => {
 	};
 
 	const handleLogin = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 
 		if (!usernameInput || !passwordInput) {
 			setIsLoading(false);
@@ -64,7 +64,7 @@ const LoginScreen = () => {
 			const userValidation: Promise<UserValidationResult> = loginUser(userData);
 
 			userValidation.then(async (result) => {
-				LOG.info(result, 'Este es el resultado de la verdad de nuclear');
+				// LOG.error(result, 'Este es el resultado de la verdad de nuclear');
 				if (result.ok) {
 					const userData: AuthenticateUserResponse | null = await authenticateUser();
 

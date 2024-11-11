@@ -26,3 +26,13 @@ export interface AuthenticateUserResponse {
 	data?: User;
 	message?: string;
 }
+
+export interface UserValidationResult {
+	ok: boolean;
+	message: string;
+	data: Data;
+}
+
+export interface Data {
+	token: string;
+}

@@ -8,10 +8,10 @@ import type {
 
 import axios, { AxiosResponse } from "axios";
 
-const API_URL_REGISTER = "http://localhost:4000/api/auth/register";
-const API_URL_LOGIN = "http://localhost:4000/api/auth/login";
-const API_URL_LOGOUT = "http://localhost:4000/api/auth/logout";
-const API_URL_GET_USER_BY_ID = "http://localhost:4000/api/auth/getUserById";
+const API_URL_REGISTER = "http://192.168.1.179:3000/api/auth/register";
+const API_URL_LOGIN = "http://192.168.1.179:3000/api/auth/login";
+const API_URL_LOGOUT = "http://192.168.1.179:3000/api/auth/logout";
+const API_URL_GET_USER_BY_ID = "http://192.168.1.179:3000/api/auth/getUserById";
 
 export const registerUser = async (user: User) => {
 	try {
@@ -73,7 +73,6 @@ export const authenticateUser = async (): Promise<AuthenticateUserResponse | nul
 			}
 		);
 
-		LOG.info(response.data);
 		return response.data;
 	} catch (error) {
 		LOG.error("Error in authenticateUser:", error);

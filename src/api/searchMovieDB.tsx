@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-import { Movie } from "../types/movieInterface";
+import axios, { type AxiosResponse } from "axios";
+import type { Movie } from "../types/movieInterface";
 import { API_KEY_MOVIES_TMDb } from "@env";
 
 const tmdbAPI = axios.create({
@@ -25,16 +25,16 @@ const searchMovieDB = async (query: string): Promise<Movie[]> => {
 			});
 
 		if (response.status === 200) {
-			// LOG.info(response.data, "This is from the searchMovieDB");
 			const movies: Movie[] = isMovieArray(response.data)
 				? response.data.results
 				: [response.data];
 
 			return movies;
-		} else {
-			throw new Error(`API request failed with status: ${response.status}`);
 		}
-	} catch (error: any) {
+
+		throw new Error(`API request failed with status: ${response.status}`);
+
+	} catch (error) {
 		throw new Error(`API request error: ${error}`);
 	}
 };

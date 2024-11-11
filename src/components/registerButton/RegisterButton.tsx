@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import type React from "react";
+import { useEffect } from "react";
 import { User } from "../../types/interfaces";
 import { setAuthStatus } from "../../lib/redux/slices/authSlice";
 import { useDispatch } from "react-redux";
@@ -15,10 +16,6 @@ const LoginButton: React.FC<LoginButtonProps> = ({
 	passwordInput,
 }) => {
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		LOG.info(usernameInput, passwordInput);
-	}, []);
 
 	const handleLogin = async () => {
 		if (usernameInput === "" || passwordInput === "") {
