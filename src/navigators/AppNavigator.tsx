@@ -23,7 +23,6 @@ const AppNavigator: React.FC = () => {
 
 		LOG.debug(userData, "hahaha");
 
-
 		if (userData?.ok && userData.data) {
 			dispatch(setAuthStatus({ isAuthenticated: true }));
 			dispatch(addUser(userData.data)); // userData.data es de tipo User

@@ -25,7 +25,10 @@ import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import { addUser } from "../lib/redux/slices/userSlice";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import type { AuthenticateUserResponse, UserValidationResult } from "../types/responseTypes";
+import type {
+	AuthenticateUserResponse,
+	UserValidationResult,
+} from "../types/responseTypes";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -63,35 +66,38 @@ const LoginScreen = () => {
 
 			const userValidation: Promise<UserValidationResult> = loginUser(userData);
 
-			userValidation.then(async (result) => {
-				// LOG.error(result, 'Este es el resultado de la verdad de nuclear');
-				if (result.ok) {
-					const userData: AuthenticateUserResponse | null = await authenticateUser();
+			userValidation
+				.then(async (result) => {
+					// LOG.error(result, 'Este es el resultado de la verdad de nuclear');
+					if (result.ok) {
+						const userData: AuthenticateUserResponse | null =
+							await authenticateUser();
 
-					if (userData?.data) {
+						if (userData?.data) {
+							setMessage(result.message);
+							showModal(result.message, false);
+
+							dispatch(addUser(userData.data));
+							setTimeout(() => {
+								dispatch(
+									setAuthStatus({
+										isAuthenticated: true,
+									})
+								);
+							}, 2000);
+						} else {
+							LOG.error("No se encontró el usuario");
+						}
+					} else {
+						LOG.info("Error de validación:", result.message);
 						setMessage(result.message);
 						showModal(result.message, false);
-
-						dispatch(addUser(userData.data));
-						setTimeout(() => {
-							dispatch(
-								setAuthStatus({
-									isAuthenticated: true,
-								})
-							);
-						}, 2000);
-					} else {
-						LOG.error("No se encontró el usuario");
 					}
-				} else {
-					LOG.info("Error de validación:", result.message);
-					setMessage(result.message);
-					showModal(result.message, false);
-				}
-			}).catch((error) => {
-				LOG.info("Error en el primer catch:", error);
-				setIsLoading(false);
-			});
+				})
+				.catch((error) => {
+					LOG.info("Error en el primer catch:", error);
+					setIsLoading(false);
+				});
 		} catch (error) {
 			LOG.info("Error en el segundo catch:", error);
 			setIsLoading(false);
@@ -110,13 +116,21 @@ const LoginScreen = () => {
 				role="presentation"
 				position="absolute"
 			/>
-			<Heading alignSelf="center" color="#fff" fontSize={"$5xl"} pt="$20" mb="$6">
+			<Heading
+				alignSelf="center"
+				color="#fff"
+				fontSize={"$5xl"}
+				pt="$20"
+				mb="$6"
+			>
 				Central Film
 			</Heading>
 			<Box mx="$8">
 				<FormControl>
 					<FormControlLabel>
-						<FormControlLabelText color="#fff">User or E-mail</FormControlLabelText>
+						<FormControlLabelText color="#fff">
+							User or E-mail
+						</FormControlLabelText>
 					</FormControlLabel>
 					<Input variant="underlined" borderColor="#fff">
 						<InputField
@@ -126,7 +140,10 @@ const LoginScreen = () => {
 							onChangeText={(text: string) => setUsernameInput(text)}
 						/>
 						{usernameInput.length > 0 && (
-							<Pressable onPress={() => setUsernameInput("")} justifyContent="center">
+							<Pressable
+								onPress={() => setUsernameInput("")}
+								justifyContent="center"
+							>
 								<AntDesign name="close" size={25} color={"#fff"} />
 							</Pressable>
 						)}
@@ -152,7 +169,9 @@ const LoginScreen = () => {
 							onPress={onPressShowPassword}
 						/>
 					</Input>
-					<Text mt="$3" color="#fff9">Forgot Password?</Text>
+					<Text mt="$3" color="#fff9">
+						Forgot Password?
+					</Text>
 				</FormControl>
 				{isLoading ? (
 					<ButtonSpinner mt="$10" color={"$red900"} size={"large"} />

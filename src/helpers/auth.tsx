@@ -54,30 +54,31 @@ export const loginUser = async (user: UserLogin) => {
 	}
 };
 
-export const authenticateUser = async (): Promise<AuthenticateUserResponse | null> => {
-	try {
-		const token = await getTokenFromUser();
+export const authenticateUser =
+	async (): Promise<AuthenticateUserResponse | null> => {
+		try {
+			const token = await getTokenFromUser();
 
-		if (!token) {
-			LOG.info("No token found for authentication.");
+			if (!token) {
+				LOG.info("No token found for authentication.");
+				return null;
+			}
+
+			const response = await axios.post<AuthenticateUserResponse>(
+				API_URL_GET_USER_BY_ID,
+				{ token },
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			return response.data;
+		} catch (error) {
+			LOG.error("Error in authenticateUser:", error);
 			return null;
 		}
+	};
 
-		const response = await axios.post<AuthenticateUserResponse>(
-			API_URL_GET_USER_BY_ID,
-			{ token },
-			{
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		);
-
-		return response.data;
-	} catch (error) {
-		LOG.error("Error in authenticateUser:", error);
-		return null;
-	}
-};
-
-export const logoutUser = async () => { };
+export const logoutUser = async () => {};

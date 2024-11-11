@@ -7,7 +7,6 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
 
-
 type RootTabParamList = {
 	Home: undefined;
 	Films: undefined;
@@ -33,8 +32,13 @@ const BottomTabNavigator = () => {
 						style={StyleSheet.absoluteFill}
 					/>
 				),
-				tabBarIcon: ({ color, focused, size }: { color: string; focused: boolean; size: number }) => {
-					let iconName: React.ComponentProps<typeof Ionicons>["name"] = "home-outline";
+				tabBarIcon: ({
+					color,
+					focused,
+					size,
+				}: { color: string; focused: boolean; size: number }) => {
+					let iconName: React.ComponentProps<typeof Ionicons>["name"] =
+						"home-outline";
 					switch (route.name) {
 						case "Home":
 							iconName = focused ? "home" : "home-outline";

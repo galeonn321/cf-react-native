@@ -1,5 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { User, Comment, Like, SavedMovie } from "../../../types/interfaces";
+import type {
+	User,
+	Comment,
+	Like,
+	SavedMovie,
+} from "../../../types/interfaces";
 import { LOG } from "../../../config/logger";
 
 const now = new Date();

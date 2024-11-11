@@ -33,7 +33,6 @@ const searchMovieDB = async (query: string): Promise<Movie[]> => {
 		}
 
 		throw new Error(`API request failed with status: ${response.status}`);
-
 	} catch (error) {
 		throw new Error(`API request error: ${error}`);
 	}
