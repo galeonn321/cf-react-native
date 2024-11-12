@@ -24,6 +24,7 @@ import { AntDesign } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createMovie } from "../../helpers/addHelpers";
 import type { RootStackParams } from "../../navigators/MainNavigator";
+import { getWatchProviders } from "../../helpers/getWatchProviders";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -52,15 +53,17 @@ const SearchContent = () => {
 
 	const verifyMovieExists = async (filmItem: Movie) => {
 		try {
-			const result = await createMovie(filmItem);
+			const watchProviders = getWatchProviders(filmItem.id);
 
-			LOG.debug(result);
+			// const result = await createMovie(filmItem);
 
-			if (result?.ok) {
-				navigation.navigate("DetailMovie", { filmItem });
-			} else {
-				LOG.info("Movie was not created or already exists", result);
-			}
+			// LOG.debug(result);
+
+			// if (result?.ok) {
+			// 	navigation.navigate("DetailMovie", { filmItem });
+			// } else {
+			// 	LOG.info("Movie was not created or already exists", result);
+			// }
 		} catch (error) {
 			LOG.error("Error in verifyMovieExists", error);
 			setIsLoading(false);
