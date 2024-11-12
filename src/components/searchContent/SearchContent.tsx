@@ -14,7 +14,7 @@ import {
 	VStack,
 } from "@gluestack-ui/themed";
 import { LOG } from "../../config/logger";
-import searchMovieDB from "../../api/searchMovieDB";
+import searchMovieDB from "../../helpers/searchMovieDB";
 import { FlashList } from "@shopify/flash-list";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";

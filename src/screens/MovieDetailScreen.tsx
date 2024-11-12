@@ -23,7 +23,7 @@ import type { Movie } from "../types/movieInterface";
 
 const { width, height } = Dimensions.get("window");
 
-interface Props extends StackScreenProps<RootStackParams, "DetailMovie"> { }
+interface Props extends StackScreenProps<RootStackParams, "DetailMovie"> {}
 
 const MovieDetailScreen = ({ route }: Props) => {
 	const { filmItem } = route.params;

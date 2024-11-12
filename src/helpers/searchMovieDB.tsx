@@ -1,13 +1,6 @@
-import axios, { type AxiosResponse } from "axios";
+import type { AxiosResponse } from "axios";
 import type { Movie } from "../types/movieInterface";
-import { API_KEY_MOVIES_TMDb } from "@env";
-
-const tmdbAPI = axios.create({
-	baseURL: "https://api.themoviedb.org/3",
-	params: {
-		api_key: API_KEY_MOVIES_TMDb,
-	},
-});
+import tmdbAPI from "../api/movieDB";
 
 type MovieApiResponse = Movie | { results: Movie[] };
 

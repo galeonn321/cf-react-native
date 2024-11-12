@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import movieDB from "../api/movieDB";
 import { LOG } from "../config/logger";
-import searchMovieDB from "../api/searchMovieDB";
+import searchMovieDB from "../helpers/searchMovieDB";
 import { Movie } from "../types/movieInterface";
 
 const useSearchMovieDB = ({ path }: any) => {
