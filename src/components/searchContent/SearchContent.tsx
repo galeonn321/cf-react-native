@@ -38,7 +38,6 @@ const SearchContent = () => {
 		try {
 			setIsLoading(true);
 			const results = await searchMovieDB(inputText);
-			LOG.info(results[0]);
 			setSearchResults(results);
 			setIsLoading(false);
 		} catch (error) {

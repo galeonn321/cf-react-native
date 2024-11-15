@@ -1,7 +1,3 @@
-
-
 export class WatchProviderMapper {
-    static WatchProviderToEntity(): {
-
-    };
+	static WatchProviderToEntity(): {};
 }

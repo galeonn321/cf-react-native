@@ -4,8 +4,9 @@ import FilmsScreen from "../screens/FilmsScreen";
 import SeriesScreen from "../screens/SeriesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
-import { StyleSheet } from "react-native";
+import { Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get("screen");
 
 type RootTabParamList = {
 	Home: undefined;
@@ -20,18 +21,21 @@ const BottomTabNavigator = () => {
 		<BottomTab.Navigator
 			initialRouteName="Home"
 			screenOptions={({ route }) => ({
-				tabBarActiveTintColor: "#fff",
-				tabBarInactiveTintColor: "#707070",
+				tabBarActiveTintColor: "#000",
+				tabBarInactiveTintColor: "#777",
+				headerShadowVisible: false,
 				tabBarStyle: {
-					backgroundColor: "#000",
+					position: "absolute",
+					bottom: 20,
+					height: 55,
+					marginHorizontal: 20,
+					backgroundColor: "#FEF9F2",
+					borderRadius: 30,
+					shadowColor: "#000",
+					shadowOpacity: 0.2,
+					shadowRadius: 10,
+					borderTopWidth: 0,
 				},
-				tabBarBackground: () => (
-					<BlurView
-						tint="dark"
-						intensity={40}
-						style={StyleSheet.absoluteFill}
-					/>
-				),
 				tabBarIcon: ({
 					color,
 					focused,
@@ -57,7 +61,7 @@ const BottomTabNavigator = () => {
 						<Ionicons
 							name={iconName}
 							size={20}
-							color={focused ? "#FF6F00" : "#fff"}
+							color={focused ? "#000" : "#777"}
 						/>
 					);
 				},

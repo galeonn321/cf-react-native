@@ -25,6 +25,7 @@ export interface User {
 	savedMovies?: SavedMovie[];
 	createdAt?: number | null;
 	updatedAt?: number | null;
+	location?: string;
 }
 
 export interface UserLogin {

@@ -13,6 +13,7 @@ export interface User {
 	updatedAt: number;
 	userId: string;
 	username: string;
+	location?: string;
 }
 
 export interface RegisterResponse {

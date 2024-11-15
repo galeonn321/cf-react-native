@@ -25,7 +25,7 @@ const AppNavigator: React.FC = () => {
 
 		if (userData?.ok && userData.data) {
 			dispatch(setAuthStatus({ isAuthenticated: true }));
-			dispatch(addUser(userData.data)); // userData.data es de tipo User
+			dispatch(addUser(userData.data));
 		} else {
 			LOG.info("No token found, please log in again or create an account.");
 		}

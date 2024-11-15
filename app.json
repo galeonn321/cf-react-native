@@ -36,10 +36,16 @@
 				"expo-image-picker",
 				{
 					"photosPermission": "custom photos permission",
-					"cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+					"cameraPermission": "Allow Central Film to open the camera",
 
 					"//": "Disables the microphone permission",
 					"microphonePermission": false
+				}
+			],
+			[
+				"expo-location",
+				{
+					"locationAlwaysAndWhenInUsePermission": "Allow Central Film to use your location to get film providers in your area."
 				}
 			]
 		],

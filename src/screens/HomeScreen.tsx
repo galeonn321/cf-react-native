@@ -16,9 +16,10 @@ import { removeTokenFromUser } from "../services/user.services";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { LOG } from "../config/logger";
-import { removeUser } from "../lib/redux/slices/userSlice";
+import { removeUser, updateUser } from "../lib/redux/slices/userSlice";
 import * as ImagePicker from "expo-image-picker";
 import type { RootState } from "../lib/redux/store";
+import { getCurrentLocation } from "../helpers/getCurrentLocation";
 
 const { height } = Dimensions.get("screen");
 
@@ -27,33 +28,42 @@ const HomeScreen: React.FC = () => {
 	const insets = useSafeAreaInsets();
 	const [open, setOpen] = useState<boolean>(false);
 	const userData = useSelector((state: RootState) => state.user);
-	const [image, setImage] = useState<string>("");
+	// const [image, setImage] = useState<string>("");
 
 	useEffect(() => {
-		(async () => {
-			if (Platform.OS !== "web") {
-				const { status } =
-					await ImagePicker.requestMediaLibraryPermissionsAsync();
-				if (status !== "granted") {
-					alert("Se necesita permiso para acceder a la galería");
-				}
-			}
-		})();
+		setLocationtoUser();
+		// (async () => {
+		// 	if (Platform.OS !== "web") {
+		// 		const { status } =
+		// 			await ImagePicker.requestMediaLibraryPermissionsAsync();
+		// 		if (status !== "granted") {
+		// 			alert("Se necesita permiso para acceder a la galería");
+		// 		}
+		// 	}
+		// })();
 	}, []);
 
-	const pickImage = async () => {
-		const result = await ImagePicker.launchImageLibraryAsync({
-			mediaTypes: ImagePicker.MediaTypeOptions.All,
-			allowsEditing: true,
-			aspect: [4, 3],
-			quality: 1,
-		});
-		LOG.warn(result);
+	// const pickImage = async () => {
+	// 	const result = await ImagePicker.launchImageLibraryAsync({
+	// 		mediaTypes: ImagePicker.MediaTypeOptions.All,
+	// 		allowsEditing: true,
+	// 		aspect: [4, 3],
+	// 		quality: 1,
+	// 	});
+	// 	LOG.warn(result);
 
-		if (!result.canceled) {
-			setImage(result.assets[0].uri);
+	// 	if (!result.canceled) {
+	// 		setImage(result.assets[0].uri);
+	// 	}
+	// };
+
+	const setLocationtoUser = async () => {
+		const location = await getCurrentLocation();
+		if (location) {
+			dispatch(updateUser({ location: location }))
 		}
-	};
+		LOG.info(userData, '')
+	}
 
 	const handleLogout = async () => {
 		await removeTokenFromUser();
@@ -78,15 +88,15 @@ const HomeScreen: React.FC = () => {
 				drawerPosition="right"
 				renderDrawerContent={() => (
 					<Center bgColor="#F7F9F2">
-						<Pressable onPress={pickImage}>
-							<Image
-								source={require("../../assets/images/avatar_default.jpg")}
-								alt="profile picture"
-								size="lg"
-								rounded="$full"
-								mt="$8"
-							/>
-						</Pressable>
+						{/* <Pressable onPress={pickImage}> */}
+						<Image
+							source={require("../../assets/images/avatar_default.jpg")}
+							alt="profile picture"
+							size="lg"
+							rounded="$full"
+							mt="$8"
+						/>
+						{/* </Pressable> */}
 						<Pressable onPress={handleLogout}>
 							<Text>Log out</Text>
 						</Pressable>

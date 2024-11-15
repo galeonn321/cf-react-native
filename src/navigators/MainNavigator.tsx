@@ -13,8 +13,6 @@ export type RootStackParams = {
 
 const MainStack = createStackNavigator<RootStackParams>();
 
-const isSignedIn = true;
-
 function MainNavigator() {
 	return (
 		<MainStack.Navigator initialRouteName="HomeScreen">

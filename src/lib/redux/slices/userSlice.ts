@@ -19,6 +19,7 @@ const initialState: User = {
 	savedMovies: [],
 	createdAt: 0,
 	updatedAt: 0,
+	location: "",
 };
 
 const userSlice = createSlice({

@@ -15,11 +15,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { LOG } from "../config/logger";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-
-const { width, height } = Dimensions.get("window");
+import type { RootStackParams } from "../navigators/MainNavigator";
 
 const ProfileScreen = () => {
-	const navigation = useNavigation<StackNavigationProp<any>>();
+	const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 	const insets = useSafeAreaInsets();
 
 	return (
